@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ataa OculoHealth — منصة التشخيص الذكي</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .hero-header { background: linear-gradient(135deg, #0d6efd, #0a58ca); color: white; padding: 40px 20px; border-radius: 0 0 20px 20px; }
+        .card-custom { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .heatmap-placeholder { background-color: #e9ecef; border: 2px dashed #6c757d; height: 250px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-header text-center mb-4">
+        <h2>Ataa OculoHealth 👁️❤️</h2>
+        <p class="mb-0">مؤسسة عطاء العقيلة التنموية — منصة تحليل الشبكية والتنبؤ بالأمراض المزمنة</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <!-- رفع الصورة -->
+            <div class="col-md-5">
+                <div class="card card-custom p-4">
+                    <h5 class="card-title mb-3">رفع صورة قاع العين (Fundus Scan)</h5>
+                    <div class="mb-3">
+                        <label for="retinaImage" class="form-label">اختر صورة أو ملف DICOM:</label>
+                        <input class="form-control" type="file" id="retinaImage" accept="image/*">
+                    </div>
+                    <button class="btn btn-primary w-100 py-2" onclick="analyzeImage()">بدء التحليل بالذكاء الاصطناعي ✨</button>
+                </div>
+            </div>
+
+            <!-- لوحة نتائج التقرير -->
+            <div class="col-md-7">
+                <div class="card card-custom p-4">
+                    <h5 class="card-title mb-3">نتائج تقرير Oculomics المبدئي</h5>
+                    
+                    <div id="resultArea" style="display: none;">
+                        <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
+                            <div>
+                                <strong>مؤشر خطر الإصابة بأمراض القلب (CVD Risk):</strong> 
+                                <span class="badge bg-danger fs-6 ms-2">18.5% — خطر متوسط</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h6>خريطة التفسير الحرارية (Grad-CAM Heatmap):</h6>
+                            <div class="heatmap-placeholder">
+                                <span>[ سيتم عرض صورة قاع العين مع التظليل الحراري للأوعية هنا ]</span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-light border rounded">
+                            <h6>التوصية الطبية المقترحة:</h6>
+                            <p class="mb-0 text-muted">توصى المريض بإجراء فحص ضغط الدم الدوري وإحالة طفيفة لمستشار جراحة القلب والأوعية للتأكد، نظراً لتغير درجات سمك الشرايين الدقيقة في الشبكية.</p>
+                        </div>
+                    </div>
+
+                    <div id="placeholderText" class="text-center text-muted py-5">
+                        قم برفع صورة واضغط على "بدء التحليل" لعرض نتائج تقرير العطاء الطبي.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function analyzeImage() {
+            const fileInput = document.getElementById('retinaImage');
+            if(!fileInput.files.length) {
+                alert('الرجاء اختيار صورة شبكية أولاً لتجربة التحليل.');
+                return;
+            }
+            document.getElementById('placeholderText').style.display = 'none';
+            document.getElementById('resultArea').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
