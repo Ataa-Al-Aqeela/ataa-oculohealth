@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ataa OculoHealth - نظام التحليل الطبي الشبكي</title>
 
-    <!-- 1. إصلاح الـ Open Graph (تغيير رابط الصورة لرابط متوفر على سيرفرك لتظهر المعاينة) -->
+    <!-- 1. Open Graph مع صورة حقيقية عالية الجودة لشبكية العين لظهور المعاينة في الواتساب والتليجرام -->
     <meta property="og:title" content="Ataa OculoHealth - نظام التحليل الطبي الشبكي" />
     <meta property="og:description" content="منصة متقدمة للتحليل الطبي والتشخيص البصري الذكي لشبكية العين." />
-    <meta property="og:image" content="https://ataa-oculohealth.vercel.app/favicon.ico" />
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fundus_photograph_of_normal_right_eye.jpg/1200px-Fundus_photograph_of_normal_right_eye.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://ataa-oculohealth.vercel.app/" />
     <meta property="og:type" content="website" />
 
@@ -16,7 +18,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ataa OculoHealth" />
     <meta name="twitter:description" content="نظام التحليل الطبي التشخيصي الشبكي." />
-    <meta name="twitter:image" content="https://ataa-oculohealth.vercel.app/favicon.ico" />
+    <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fundus_photograph_of_normal_right_eye.jpg/1200px-Fundus_photograph_of_normal_right_eye.jpg" />
 
     <style>
         body {
@@ -103,17 +105,17 @@
         <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageSelection(event)">
         <img id="imagePreview" class="preview-img" style="display:none;" alt="معاينة الصورة" />
     </div>
-
     <!-- زر بدء التحليل بالذكاء الاصطناعي -->
     <button id="analyzeBtn" class="btn-analyze" style="display:none;" onclick="startAIAnalysis()">
         بدء التحليل البصري بالذكاء الاصطناعي
     </button>
+
     <!-- منطقة عرض نتائج التقرير الطبي -->
     <div id="reportContainer" class="result-box" style="display:none;">
         <h2>تقرير التشخيص الطبي الشبكي المفصل</h2>
         <div id="reportContent"></div>
 
-        <!-- 3. إصلاح زر الواتساب الشامل -->
+        <!-- زر مشاركة الواتساب -->
         <button class="btn-whatsapp" onclick="shareToWhatsApp()">
             مشاركة التقرير عبر واتساب
         </button>
@@ -123,7 +125,7 @@
 <script>
     let selectedImageFile = null;
 
-    // 2. إصلاح تعليمات الذكاء الاصطناعي (Prompt) لتصفير الذاكرة والترجمة الكاملة
+    // تعليمات الذكاء الاصطناعي (System Prompt) للترجمة الكاملة وتصفير الذاكرة
     const SYSTEM_PROMPT = 
     أنت طبيب استشاري متخصص في تحليل صور قعر العين وشبكية العين (Retina & Fundus Specialist).
     تعليمات التحليل الصارمة:
@@ -169,11 +171,6 @@
     }
 
     function executeAIAnalysis(file) {
-        /*
-          ملاحظة: يمكنك إدراج رابط كود الـ API الخاص بك هنا.
-          تم ضبط النظام بحيث يرسل الصورة مع SYSTEM_PROMPT المعالج باللغة العربية.
-        */
-        
         setTimeout(() => {
             // نتيجة النموذج المستقلة والمترجمة كاملاً
             document.getElementById('reportContent').innerHTML = 
@@ -194,7 +191,7 @@
             ;
         }, 1800);
     }
-   // 3. إصلاح رابط الواتساب الشامل والمباشر
+   // رابط مشاركة الواتساب الشامل والمباشر
     function shareToWhatsApp() {
         const currentUrl = window.location.href;
         const messageText = "تقرير التحليل الطبي لشبكية العين - Ataa OculoHealth:\n" + currentUrl;
