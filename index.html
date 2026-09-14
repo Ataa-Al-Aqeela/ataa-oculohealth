@@ -1,82 +1,260 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ataa OculoHealth — منصة التشخيص الذكي</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .hero-header { background: linear-gradient(135deg, #0d6efd, #0a58ca); color: white; padding: 40px 20px; border-radius: 0 0 20px 20px; }
-        .card-custom { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .heatmap-placeholder { background-color: #e9ecef; border: 2px dashed #6c757d; height: 250px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #6c757d; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ataa OculoHealth | منصة تحليل الشبكية والتنبؤ بالأمراض</title>
+  
+  <!-- Open Graph / Social Media Preview Meta Tags -->
+  <meta property="og:title" content="Ataa OculoHealth - منصة تحليل الشبكية المتقدمة">
+  <meta property="og:description" content="منصة ذكاء اصطناعي واعدة لتشخيص وعروض تقارير Oculomics من خلال صور قاع العين (Fundus Scan).">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:url" content="https://ataa-oculohealth.vercel.app/">
+  <meta property="og:type" content="website">
+
+  <!-- PWA Manifest & Mobile Optimization -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkF0YWEgT2N1bG9IZWFsdGgiLAogICJzaG9ydF9uYW1lIjogIk9jdWxvSGVhbHRoIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjMjU2M2ViIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS81MTIvMzI0NC8zMjQ0MTI1LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Font & Bootstrap RTL & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #06b6d4;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+      font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+      background: #f8fafc;
+      color: #334155;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-header {
+      background: var(--bg-gradient);
+      color: white;
+      padding: 3.5rem 1rem 4.5rem;
+      border-radius: 0 0 2.5rem 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(37, 99, 235, 0.15);
+      filter: blur(80px);
+      border-radius: 50%;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .drop-zone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 1rem;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .drop-zone:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      color: white;
+      border: none;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+      transition: all 0.2s ease;
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.5);
+      color: white;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+      #pwaInstallBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="hero-header text-center mb-4">
-        <h2>Ataa OculoHealth 👁️❤️</h2>
-        <p class="mb-0">مؤسسة عطاء العقيلة التنموية — منصة تحليل الشبكية والتنبؤ بالأمراض المزمنة</p>
-    </div>
-
+  <!-- Hero Banner -->
+  <header class="hero-header text-center position-relative">
     <div class="container">
-        <div class="row g-4">
-            <!-- رفع الصورة -->
-            <div class="col-md-5">
-                <div class="card card-custom p-4">
-                    <h5 class="card-title mb-3">رفع صورة قاع العين (Fundus Scan)</h5>
-                    <div class="mb-3">
-                        <label for="retinaImage" class="form-label">اختر صورة أو ملف DICOM:</label>
-                        <input class="form-control" type="file" id="retinaImage" accept="image/*">
-                    </div>
-                    <button class="btn btn-primary w-100 py-2" onclick="analyzeImage()">بدء التحليل بالذكاء الاصطناعي ✨</button>
-                </div>
-            </div>
-
-            <!-- لوحة نتائج التقرير -->
-            <div class="col-md-7">
-                <div class="card card-custom p-4">
-                    <h5 class="card-title mb-3">نتائج تقرير Oculomics المبدئي</h5>
-                    
-                    <div id="resultArea" style="display: none;">
-                        <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
-                            <div>
-                                <strong>مؤشر خطر الإصابة بأمراض القلب (CVD Risk):</strong> 
-                                <span class="badge bg-danger fs-6 ms-2">18.5% — خطر متوسط</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <h6>خريطة التفسير الحرارية (Grad-CAM Heatmap):</h6>
-                            <div class="heatmap-placeholder">
-                                <span>[ سيتم عرض صورة قاع العين مع التظليل الحراري للأوعية هنا ]</span>
-                            </div>
-                        </div>
-
-                        <div class="p-3 bg-light border rounded">
-                            <h6>التوصية الطبية المقترحة:</h6>
-                            <p class="mb-0 text-muted">توصى المريض بإجراء فحص ضغط الدم الدوري وإحالة طفيفة لمستشار جراحة القلب والأوعية للتأكد، نظراً لتغير درجات سمك الشرايين الدقيقة في الشبكية.</p>
-                        </div>
-                    </div>
-
-                    <div id="placeholderText" class="text-center text-muted py-5">
-                        قم برفع صورة واضغط على "بدء التحليل" لعرض نتائج تقرير العطاء الطبي.
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="d-inline-flex align-items-center gap-2 mb-3 bg-white bg-opacity-10 px-3 py-1 rounded-pill">
+        <i class="fa-solid me-1 fa-eye text-info"></i>
+        <span class="small fw-bold">مؤسسة العقيلة التنموية</span>
+      </div>
+      <h1 class="fw-bold mb-2 display-6">Ataa OculoHealth</h1>
+      <p class="text-light opacity-75 max-w-2xl mx-auto lead fs-6">
+        المنصة المتقدمة لتحليل صور الشبكية والتنبؤ الرقمي المبكر بالأمراض المزمنة (Oculomics)
+      </p>
     </div>
+  </header>
 
-    <script>
-        function analyzeImage() {
-            const fileInput = document.getElementById('retinaImage');
-            if(!fileInput.files.length) {
-                alert('الرجاء اختيار صورة شبكية أولاً لتجربة التحليل.');
-                return;
-            }
-            document.getElementById('placeholderText').style.display = 'none';
-            document.getElementById('resultArea').style.display = 'block';
-        }
-    </script>
+  <!-- Main Workspace -->
+  <main class="container my-n4 position-relative z-2 mb-5">
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Upload Section -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 h-100">
+          <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up text-primary"></i>
+            رفع فحص قاع العين (Fundus Scan)
+          </h5>
+          <p class="text-muted small mb-4">يدعم جميع صيغ الصور الطبية مثل DICOM, PNG, JPG</p>
+
+          <div class="drop-zone mb-3" onclick="document.getElementById('retinaImage').click()">
+            <i class="fa-regular fa-image fa-3x text-secondary mb-3"></i>
+            <h6 class="fw-bold">انقر هنا أو اسحب الصورة للرفع</h6>
+            <span class="text-muted small" id="fileNameDisplay">لم يتم اختيار أي ملف بعد</span>
+            <input type="file" id="retinaImage" class="d-none" accept="image/*" onchange="updateFileName(this)">
+          </div>
+
+          <button class="btn btn-gradient w-100 py-3" onclick="analyzeImage()">
+            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+            بدء التحليل بالذكاء الاصطناعي
+          </button>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="col-lg-7">
+        <div class="glass-card p-4 h-100">
+          <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-primary"></i>
+            تقرير نتائج التحليل المبدئي
+          </h5>
+
+          <!-- Default State -->
+          <div id="placeholderText" class="text-center py-5 text-muted">
+            <i class="fa-solid fa-microscope fa-3x mb-3 opacity-25"></i>
+            <p>قم برفع صورة الفحص واضغط على "بدء التحليل" لعرض نتائج تقرير العطاء الطبي.</p>
+          </div>
+
+          <!-- Active Analysis Results Area -->
+          <div id="resultArea" style="display: none;">
+            <div class="alert alert-warning border-0 shadow-sm d-flex align-items-center gap-3 mb-4">
+              <i class="fa-solid fa-triangle-exclamation fa-2x text-warning"></i>
+              <div>
+                <strong>مؤشر خطر الإصابة بأمراض القلب (CVD Risk):</strong>
+                <div class="mt-1">
+                  <span class="badge bg-danger fs-6">18.5% - خطر متوسط إلى مرتفع</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-light p-3 rounded-3 mb-3">
+              <h6 class="fw-bold mb-2 text-dark"><i class="fa-solid fa-notes-medical me-2 text-primary"></i> الملاحظات التشخيصية:</h6>
+              <p class="text-muted small mb-0">
+                أظهرت النتائج تغيراً في درجات سمك الشرايين الدقيقة في الشبكية. يوصى بالمتابعة الدورية واستشارة طبيب العيون والقلب للتأكد.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- PWA Install Button -->
+  <button id="pwaInstallBtn" class="btn btn-dark btn-sm rounded-pill shadow-lg">
+    <i class="fa-solid fa-download me-1"></i> تثبيت التطبيق
+  </button>
+
+  <footer class="mt-auto py-3 text-center text-muted small">
+    جميع الحقوق محفوظة © مؤسسة العقيلة التنموية - Ataa OculoHealth
+  </footer>
+  <script>
+    function updateFileName(input) {
+      const display = document.getElementById('fileNameDisplay');
+      if (input.files && input.files[0]) {
+        display.innerText = input.files[0].name;
+        display.classList.add('text-primary', 'fw-bold');
+      }
+    }
+
+    function analyzeImage() {
+      const fileInput = document.getElementById('retinaImage');
+      if (!fileInput.files.length) {
+        alert('الرجاء اختيار صورة شبكية أولاً لتجربة التحليل.');
+        return;
+      }
+      document.getElementById('placeholderText').style.display = 'none';
+      document.getElementById('resultArea').style.display = 'block';
+    }
+
+    // Register Service Worker for Offline Capabilities
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const swCode = 
+          self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+          self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+        ;
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+      });
+    }
+
+    // PWA Install Prompt Handler
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('pwaInstallBtn');
+      btn.style.display = 'block';
+      btn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+      });
+    });
+  </script>
 </body>
 </html>
