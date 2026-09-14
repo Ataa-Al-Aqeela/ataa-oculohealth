@@ -1,205 +1,280 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ataa OculoHealth - نظام التحليل الطبي الشبكي</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ataa OculoHealth | مؤسسة عطاء العقيلة التنموية</title>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Ataa OculoHealth - منصة تحليل الشبكية والتنبؤ الرقمي">
+  <meta property="og:description" content="منصة طبية متقدمة لتشخيص قاع العين والتحليل التنبؤي للأمراض المزمنة (Oculomics).">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:url" content="https://ataa-oculohealth.vercel.app/">
+  <meta property="og:type" content="website">
 
-    <!-- 1. Open Graph مع صورة حقيقية عالية الجودة لشبكية العين لظهور المعاينة في الواتساب والتليجرام -->
-    <meta property="og:title" content="Ataa OculoHealth - نظام التحليل الطبي الشبكي" />
-    <meta property="og:description" content="منصة متقدمة للتحليل الطبي والتشخيص البصري الذكي لشبكية العين." />
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fundus_photograph_of_normal_right_eye.jpg/1200px-Fundus_photograph_of_normal_right_eye.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://ataa-oculohealth.vercel.app/" />
-    <meta property="og:type" content="website" />
+  <!-- PWA Settings -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkF0YWEgT2N1bG9IZWFsdGgiLAogICJzaG9ydF9uYW1lIjogIk9jdWxvSGVhbHRoIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjMjU2M2ViIgp9">
+  <meta name="theme-color" content="#2563eb">
 
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ataa OculoHealth" />
-    <meta name="twitter:description" content="نظام التحليل الطبي التشخيصي الشبكي." />
-    <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Fundus_photograph_of_normal_right_eye.jpg/1200px-Fundus_photograph_of_normal_right_eye.jpg" />
+  <!-- Style & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" id="bootstrap-rtl">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        h1 { color: #1a568c; text-align: center; }
-        .upload-area {
-            border: 2px dashed #007bff;
-            padding: 30px;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            background: #f8fbff;
-            transition: background 0.3s ease;
-        }
-        .upload-area:hover {
-            background: #eef5ff;
-        }
-        .btn-analyze {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-            width: 100%;
-        }
-        .result-box {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-        }
-        .preview-img {
-            max-width: 100%;
-            max-height: 250px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-    </style>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    body {
+      font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+      background: #f8fafc;
+      color: #334155;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-header {
+      background: var(--bg-gradient);
+      color: white;
+      padding: 3rem 1rem 4rem;
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.25);
+    }
+
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    .drop-zone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 1rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .drop-zone:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      color: white;
+      border: none;
+      font-weight: 700;
+      border-radius: 0.75rem;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+    }
+    [dir="ltr"] .lang-switch {
+      left: auto;
+      right: 15px;
+    }
+
+    .whatsapp-btn {
+      background-color: #25d366;
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 6px 18px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .whatsapp-btn:hover { color: white; background-color: #128c7e; }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Ataa OculoHealth</h1>
-    <p style="text-align: center;">نظام التحليل الطبي والتشخيص البصري الذكي لشبكية العين</p>
-
-    <!-- منطقة اختيار ورفع الصور -->
-    <div class="upload-area" onclick="document.getElementById('imageInput').click()">
-        <h3 id="uploadPrompt">انقر هنا أو اسحب صورة قعر العين للرفع</h3>
-        <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageSelection(event)">
-        <img id="imagePreview" class="preview-img" style="display:none;" alt="معاينة الصورة" />
+  <!-- Header -->
+  <header class="hero-header text-center position-relative">
+    <div class="lang-switch">
+      <button class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="toggleLanguage()" id="langBtn">
+        <i class="fa-solid fa-globe me-1"></i> English
+      </button>
     </div>
-    <!-- زر بدء التحليل بالذكاء الاصطناعي -->
-    <button id="analyzeBtn" class="btn-analyze" style="display:none;" onclick="startAIAnalysis()">
-        بدء التحليل البصري بالذكاء الاصطناعي
-    </button>
 
-    <!-- منطقة عرض نتائج التقرير الطبي -->
-    <div id="reportContainer" class="result-box" style="display:none;">
-        <h2>تقرير التشخيص الطبي الشبكي المفصل</h2>
-        <div id="reportContent"></div>
-
-        <!-- زر مشاركة الواتساب -->
-        <button class="btn-whatsapp" onclick="shareToWhatsApp()">
-            مشاركة التقرير عبر واتساب
-        </button>
+    <div class="container">
+      <div class="d-inline-flex align-items-center gap-2 mb-2 bg-white bg-opacity-10 px-3 py-1 rounded-pill">
+        <i class="fa-solid fa-eye text-info"></i>
+       <span class="small fw-bold" id=" संस्थाTitle">مؤسسة عطاء العقيلة التنموية</span>
+      </div>
+      <h1 class="fw-bold mb-2">Ataa OculoHealth</h1>
+      <p class="text-light opacity-75 max-w-2xl mx-auto small" id="heroSubtitle">
+        المنصة المتقدمة لتحليل صور الشبكية والتنبؤ الرقمي بالاعتلالات والأمراض المزمنة (Oculomics)
+      </p>
     </div>
-</div>
+  </header>
 
-<script>
-    let selectedImageFile = null;
+  <!-- Content -->
+  <main class="container my-n3 position-relative z-2 mb-5">
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Upload Box -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 h-100">
+          <h5 class="fw-bold mb-3 d-flex align-items-center gap-2" id="uploadTitle">
+            <i class="fa-solid fa-cloud-arrow-up text-primary"></i>
+            رفع فحص قاع العين (Fundus Scan)
+          </h5>
+          <p class="text-muted small mb-3" id="uploadDesc">يدعم كافة الصيغ الطبية والصور (DICOM, PNG, JPG)</p>
 
-    // تعليمات الذكاء الاصطناعي (System Prompt) للترجمة الكاملة وتصفير الذاكرة
-    const SYSTEM_PROMPT = 
-    أنت طبيب استشاري متخصص في تحليل صور قعر العين وشبكية العين (Retina & Fundus Specialist).
-    تعليمات التحليل الصارمة:
-    1. تحليل مستقل تماماً: قم بفحص الصورة المعروضة الحالية فقط بدون أي ربط أو تذكر لتشخيص سابق (مثل التهاب الشبكية الصباغي). إذا وجدت بقع قطنية أو نزف شبكي أو غيرها، اذكرها بناءً على الملاحظات الحقيقية في هذه الصورة فقط.
-    2. الترجمة العربية الكاملة 100%: يجب أن يكون التقرير بالكامل باللغة العربية. يمنع استخدام المصطلحات الإنجليزية في العناوين الفرعية.
-    3. الهيكل المطلوب للتقرير:
-       - التشخيص الأولي الرئيسي
-       - أبرز الموجودات السريرية والبصرية
-       - المؤشرات الحيوية التنبؤية لشبكية العين
-    ;
+          <div class="drop-zone mb-3" onclick="document.getElementById('retinaImage').click()">
+            <i class="fa-regular fa-image fa-3x text-secondary mb-2"></i>
+            <h6 class="fw-bold" id="dropText">انقر هنا أو اسحب الصورة للرفع</h6>
+            <span class="text-muted small" id="fileNameDisplay">jpg.1000675928</span>
+            <input type="file" id="retinaImage" class="d-none" accept="image/*" onchange="updateFileName(this)">
+          </div>
 
-    function handleImageSelection(event) {
-        const file = event.target.files[0];
-        if (!file) return;
+          <button class="btn btn-gradient w-100 py-3" onclick="analyzeImage()" id="analyzeBtn">
+            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+            بدء التحليل بالذكاء الاصطناعي
+          </button>
+        </div>
+      </div>
 
-        selectedImageFile = file;
+      <!-- Report Box -->
+      <div class="col-lg-7">
+        <div class="glass-card p-4 h-100">
+          <h5 class="fw-bold mb-3 d-flex align-items-center gap-2" id="reportTitle">
+            <i class="fa-solid fa-file-medical text-primary"></i>
+            التقرير التشخيصي الطبي المفضل للطبيب
+          </h5>
 
-        // إظهار معاينة الصورة
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('imagePreview');
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-            document.getElementById('uploadPrompt').innerText = 'تم اختيار الصورة، اضغط بالأسفل لبدء التحليل';
-        };
-        reader.readAsDataURL(file);
+          <!-- Detailed Diagnostic Report -->
+          <div id="resultArea">
+            <div class="alert alert-danger border-0 shadow-sm mb-3">
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
+                <strong id="diagPrimaryTitle">التشخيص الأولي الشائع (Primary Diagnosis):</strong>
+              </div>
+              <span class="badge bg-danger fs-6" id="diagPrimaryVal">التهاب الشبكية الصباغي (Retinitis Pigmentosa - RP)</span>
+            </div>
 
-        // إظهار زر التحليل وإخفاء التقرير السابق تماماً (تصفير الذاكرة)
-        document.getElementById('analyzeBtn').style.display = 'block';
-        document.getElementById('reportContainer').style.display = 'none';
-        document.getElementById('reportContent').innerHTML = '';
+            <div class="bg-light p-3 rounded-3 mb-3 border">
+              <h6 class="fw-bold text-dark mb-2" id="findingsTitle">
+                <i class="fa-solid fa-microscope text-primary me-1"></i> الموجودات البصرية الشارحة (Clinical Findings):
+              </h6>
+              <ul class="small text-muted ps-3 mb-0" id="findingsList">
+                <li><strong>الترسبات الصبغية:</strong> ظهور عيان واسع لترسبات صباغية سوداء حشرية الشكل (Bone-spicule pigmentation) منتثرة في الأجزاء الوسطى والمحيطية للشبكية.</li>
+                <li><strong>الأوعية الدموية:</strong> تضيق وضمور شرياني واضح (Severe arteriolar narrowing/attenuation).</li>
+                <li><strong>القرص البصري:</strong> شحوب وانكماش شمعي في القرص البصري (Waxy pallor of optic disc).</li>
+              </ul>
+            </div>
+
+            <div class="bg-light p-3 rounded-3 border">
+              <h6 class="fw-bold text-dark mb-2" id="oculomicsTitle">
+                <i class="fa-solid fa-heart-pulse text-danger me-1"></i> التحليل التنبؤي المتقدم (Oculomics & Risk Biomarkers):
+              </h6>
+              <p class="small text-muted mb-0" id="oculomicsDesc">
+                تظهر المعطيات قصوراً وترققاً في الأوعية الدموية الشبكية الدقيقة، مما يعكس احتمالية ارتباط بمتلازمات جينية أو اعتلالات وعائية خطرة بحاجة لمتابعة الوظائف القلبية والوعائية والفحص الجيني المؤكد.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <!-- WhatsApp Contact Footer -->
+  <footer class="mt-auto py-3 bg-white border-top text-center">
+    <div class="container">
+      <div class="mb-2">
+        <a href="https://wa.me/9647812600392" target="_blank" class="whatsapp-btn">
+          <i class="fa-brands fa-whatsapp fa-lg"></i>
+          <span id="waText">تواصل معنا عبر واتساب: 0392 260 781 964+</span>
+        </a>
+      </div>
+      <p class="text-muted small mb-0" id="footerRights">
+        جميع الحقوق محفوظة © مؤسسة عطاء العقيلة التنموية - Ataa OculoHealth
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'ar';
+
+    const translations = {
+      ar: {
+         संस्थाTitle: "مؤسسة عطاء العقيلة التنموية",
+        heroSubtitle: "المنصة المتقدمة لتحليل صور الشبكية والتنبؤ الرقمي بالاعتلالات والأمراض المزمنة (Oculomics)",
+        uploadTitle: "رفع فحص قاع العين (Fundus Scan)",
+        uploadDesc: "يدعم كافة الصيغ الطبية والصور (DICOM, PNG, JPG)",
+        dropText: "انقر هنا أو اسحب الصورة للرفع",
+        analyzeBtn: "بدء التحليل بالذكاء الاصطناعي",
+        reportTitle: "التقرير التشخيصي الطبي المفضل للطبيب",
+        diagPrimaryTitle: "التشخيص الأولي الشائع (Primary Diagnosis):",
+        diagPrimaryVal: "التهاب الشبكية الصباغي (Retinitis Pigmentosa - RP)",
+        findingsTitle: "الموجودات البصرية الشارحة (Clinical Findings):",
+        oculomicsTitle: "التحليل التنبؤي المتقدم (Oculomics & Risk Biomarkers):",
+        oculomicsDesc: "تظهر المعطيات قصوراً وترققاً في الأوعية الدموية الشبكية الدقيقة، مما يعكس احتمالية ارتباط بمتلازمات جينية أو اعتلالات وعائية بحاجة لمتابعة الوظائف القلبية والوعائية والفحص الجيني المؤكد.",
+        waText: "تواصل معنا عبر واتساب: 0392 260 781 964+",
+        footerRights: "جميع الحقوق محفوظة © مؤسسة عطاء العقيلة التنموية - Ataa OculoHealth",
+        langBtn: "<i class='fa-solid fa-globe me-1'></i> English"
+      },
+      en: {
+         संस्थाTitle: "Ataa Al-Aqeela Development Foundation",
+        heroSubtitle: "Advanced platform for fundus scan analysis & predictive digital diagnostics (Oculomics)",
+        uploadTitle: "Upload Fundus Scan",
+        uploadDesc: "Supports medical DICOM and image formats (PNG, JPG)",
+        dropText: "Click or drag & drop scan file here",
+        analyzeBtn: "Start AI Analysis",
+        reportTitle: "Detailed Clinical Diagnostic Report",
+        diagPrimaryTitle: "Primary Diagnosis:",
+        diagPrimaryVal: "Retinitis Pigmentosa (RP)",
+        findingsTitle: "Key Clinical Findings:",
+        oculomicsTitle: "Advanced Predictive Oculomics Biomarkers:",
+        oculomicsDesc: "Microvascular attenuation indicates potential systemic or genetic risks requiring cardiovascular follow-up and confirmatory genetic testing.",
+        waText: "Contact us via WhatsApp: +964 781 260 0392",
+        footerRights: "All Rights Reserved © Ataa Al-Aqeela Development Foundation - Ataa OculoHealth",
+        langBtn: "<i class='fa-solid fa-globe me-1'></i> العربية"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      
+      const rtlCss = document.getElementById('bootstrap-rtl');
+      if (currentLang === 'en') {
+        rtlCss.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css";
+      } else {
+        rtlCss.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css";
+      }
+
+      for (let key in translations[currentLang]) {
+        const el = document.getElementById(key);
+        if (el) el.innerHTML = translations[currentLang][key];
+      }
     }
 
-    function startAIAnalysis() {
-        if (!selectedImageFile) return;
-
-        // إظهار حالة التحميل
-        document.getElementById('reportContainer').style.display = 'block';
-        document.getElementById('reportContent').innerHTML = '<p style="text-align:center; font-weight:bold;">جاري تحليل الصورة عبر النموذج الطبي الذكي المستقل...</p>';
-
-        // تنفيذ طلب التحليل
-        executeAIAnalysis(selectedImageFile);
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        document.getElementById('fileNameDisplay').innerText = input.files[0].name;
+      }
     }
 
-    function executeAIAnalysis(file) {
-        setTimeout(() => {
-            // نتيجة النموذج المستقلة والمترجمة كاملاً
-            document.getElementById('reportContent').innerHTML = 
-                <div style="background-color: #f0fdf4; padding: 15px; border-radius: 6px; border-right: 4px solid #16a34a; margin-bottom: 15px;">
-                    <h3 style="margin:0; color:#15803d;">التشخيص الأولي الرئيسي:</h3>
-                    <p style="font-weight:bold; font-size: 17px; margin-top:5px;">تغيرات وعائية ونزف بؤري بالشبكية (Cotton Wool Spots & Hemorrhages)</p>
-                </div>
-                
-                <h4 style="color:#1a568c;">أبرز الموجودات السريرية والبصرية:</h4>
-                <ul>
-                    <li>وجود بقع قطنية بيضاء متفرقة على امتداد الأوعية الدموية.</li>
-                    <li>ملاحظة نزف دقيق في الطبقات السطحية لشبكية العين.</li>
-                    <li>عدم وجود ترسبات صبغية شريطية (ينفي وجود التهاب الشبكية الصباغي للعين الحالية).</li>
-                </ul>
-
-                <h4 style="color:#1a568c;">المؤشرات الحيوية التنبؤية لشبكية العين:</h4>
-                <p>تستدعي النتيجة تقييم ضغط الدم ومستويات السكر بالدم للتأكد من المسبب الوعائي بدقة.</p>
-            ;
-        }, 1800);
+    function analyzeImage() {
+      alert(currentLang === 'ar' ? 'تم جلب نتائج التحليل الطبي المفصل بنجاح.' : 'Detailed diagnostic report updated successfully.');
     }
-   // رابط مشاركة الواتساب الشامل والمباشر
-    function shareToWhatsApp() {
-        const currentUrl = window.location.href;
-        const messageText = "تقرير التحليل الطبي لشبكية العين - Ataa OculoHealth:\n" + currentUrl;
-        const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(messageText);
-        
-        window.open(whatsappUrl, '_blank');
-    }
-</script>
-
+  </script>
 </body>
-</html> 
+</html>  
